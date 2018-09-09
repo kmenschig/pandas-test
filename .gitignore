@@ -1,0 +1,6 @@
+# Ignore all .png files
+*.png
+
+# ignore virtual environment
+/env
+
