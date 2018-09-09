@@ -1,6 +1,7 @@
 #http://markthegraph.blogspot.com/2015/05/using-python-statsmodels-for-ols-#linear.html
-
+import sys
 import numpy as np
+import pandas as pd
 
 x = np.random.randn(100)
 
@@ -8,18 +9,39 @@ y = x + np.random.randn(100) + 10
 
 x=[4843, 6192, 7520, 8802, 8802]
 y=[3.478, 3.716, 4.167, 4.506, 4.596]
+
+df = pd.read_csv('linReg.csv', header=None, sep=';', 
+                                           names=['x','y'])
+      
+x = df['x']
+y = df['y']
+
+print(type(x))
+
+x = df['x'].values
+
+print(x)     
+
+sys.exit(1)                              
+
 print(x)
 print()
 print(y)
+
+#exit()
 
 import matplotlib.pyplot as plt
 
 fig, ax = plt.subplots(figsize=(8, 4))
 
 ax.scatter(x, y, alpha=0.5, color='orchid')
+
 fig.suptitle('Example Scatter Plot')
+
 fig.tight_layout(pad=2); 
+
 ax.grid(True)
+
 fig.savefig('filename1.png', dpi=125)
 
 import statsmodels.api as sm
