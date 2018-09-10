@@ -1,42 +1,26 @@
 #http://markthegraph.blogspot.com/2015/05/using-python-statsmodels-for-ols-#linear.html
 import sys
+import math
 import numpy as np
 import pandas as pd
 
-x = np.random.randn(100)
+#x = np.random.randn(100)
 
-y = x + np.random.randn(100) + 10
-
-x=[4843, 6192, 7520, 8802, 8802]
-y=[3.478, 3.716, 4.167, 4.506, 4.596]
+#y = x + np.random.randn(100) + 10
 
 df = pd.read_csv('linReg.csv', header=None, sep=';', 
                                            names=['x','y'])
       
-x = df['x']
-y = df['y']
-
-print(type(x))
-
 x = df['x'].values
-
-print(x)     
-
-sys.exit(1)                              
-
-print(x)
-print()
-print(y)
-
-#exit()
+y = df['y'].values
 
 import matplotlib.pyplot as plt
 
 fig, ax = plt.subplots(figsize=(8, 4))
 
-ax.scatter(x, y, alpha=0.5, color='orchid')
+ax.scatter(x, np.exp(y), alpha=0.5, color='orchid')
 
-fig.suptitle('Example Scatter Plot')
+fig.suptitle('Exponentialfunktion mit Konfidenzinterval')
 
 fig.tight_layout(pad=2); 
 
@@ -60,14 +44,14 @@ x_pred2 = sm.add_constant(x_pred)
 
 y_pred = fitted.predict(x_pred2)
 
-ax.plot(x_pred, y_pred, '-', color='darkorchid', linewidth=2)
+ax.plot(x_pred, np.exp(y_pred), '-', color='darkorchid', linewidth=2)
 
 fig.savefig('filename2.png', dpi=125)
 
 print(fitted.params)     # the estimated parameters for the regression line
 print(fitted.summary())  # summary statistics for the regression
 
-y_hat = fitted.predict(x) # x is an array from line 12 above
+y_hat = fitted.predict(x) # x is 
 
 y_err = y - y_hat
 
@@ -90,6 +74,6 @@ upper = y_pred + abs(conf)
 
 lower = y_pred - abs(conf)
 
-ax.fill_between(x_pred, lower, upper, color='#888888', alpha=0.4)
+ax.fill_between(x_pred, np.exp(lower), np.exp(upper), color='#888888', alpha=0.4)
 
 fig.savefig('filename3.png', dpi=125)
